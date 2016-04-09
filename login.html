@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<script src="js/jquery.min.js"></script>
+
+<title>ChatAll | Login</title>
+</head>
+
+<style>
+#container
+{
+	 position:absolute;
+     width:400px;
+     height:350px;
+     z-index:15;
+     top:45%;
+     left:48%;
+     margin:-100px 0 0 -150px;
+     background:white;
+	 outline:none;
+     border: 1px solid #9D9FD9; 
+     box-shadow: 0px 0px 5px  #9D9FD9;
+     -moz-box-shadow: 0px 0px 5px #9D9FD9;
+     -webkit-box-shadow: 0px 0px 5px #9D9FD9; 
+}
+button
+{
+	border-radius:5px; 
+	background-color:#5FD86D;
+	width:100px;
+	height:30px
+}
+input
+{
+	height:25px;
+	width:250px;
+}
+input:focus
+{
+	outline:none;
+    border: 1px solid #4195fc; 
+    box-shadow: 0px 0px 5px #4195fc; 
+    -moz-box-shadow: 0px 0px 5px #4195fc;
+    -webkit-box-shadow: 0px 0px 5px #4195fc; 
+}
+</style>
+
+<script>
+$(document).ready(function(e) {
+    $("#login").click(function(e) {
+        var id = $("#id").val();
+		var pass = $("#pass").val();
+		if(id == "" || pass == "")
+			alert("enter username or password");
+		else
+		{
+			$.ajax({
+			url: "login.php",
+			cache:false,
+			data: {"id":id,"pass":pass},
+			success:function(data)
+						{
+							if(data == "true")
+								window.open("index.php","_self");
+							else alert(data);		
+						},
+				error : function(data)
+						{
+							alert(data);
+						}		
+					});
+		}
+    });
+});
+</script>
+
+<body style="background-image:url(img/icon.jpg);background-repeat:no-repeat;background-position:top">
+<div id="container">
+<table align="center" style="margin-top:25%;">
+	<tr>
+    	<td>
+        <label> Username</label><br>
+        <input type="username" id="id" placeholder="username">
+        </td>
+    </tr>
+    <tr>
+    	<td>
+        <label> Password</label><br>
+        <input type="password" id="pass" placeholder="password">
+        </td>
+    </tr>
+    <tr>
+    	<td align="right">
+        <button id="login">login</button>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
